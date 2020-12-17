@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import colors from "colors";
 import productRoutes from "./routes/productRoute.js";
+import { notFund, errorHandler } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 
@@ -16,6 +17,14 @@ app.get("/", (req, res) => {
 
 app.use("/api/products", productRoutes);
 
-const PORT = process.env.PORT || 5000
+app.use(notFund);
 
-app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}` .yellow.bold));
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () =>
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+  )
+);
