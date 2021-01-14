@@ -113,3 +113,26 @@ export const orderListReducer = (state = { orders: [] }, action) => {
       return state;
   }
 };
+
+export const orderDeliverReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actions.ORDER_DELIVER_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.ORDER_DELIVER_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case actions.ORDER_DELIVER_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case actions.ORDER_DELIVER_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
