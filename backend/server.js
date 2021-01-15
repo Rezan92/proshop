@@ -8,6 +8,7 @@ import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import { notFund, errorHandler } from "./middleware/errorMiddleware.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
+// import morgan from "morgan";
 import cors from "cors";
 
 dotenv.config();
@@ -15,6 +16,9 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+// app.use(morgan("dev"));
+
 app.use(cors());
 app.use(express.json());
 
