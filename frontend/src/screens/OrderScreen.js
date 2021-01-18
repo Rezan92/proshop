@@ -6,11 +6,7 @@ import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import {
-  getOrderDetails,
-  payOrder,
-  deliverOrder,
-} from "../actions/orderActions";
+import { getOrderDetails, payOrder, deliverOrder } from "../actions/orderActions";
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
@@ -108,7 +104,7 @@ const OrderScreen = ({ match, history }) => {
                 {order.shippingAddress.country}
               </p>
               {order.isDelivered ? (
-                <Message variant="success">Delivered</Message>
+                <Message variant="success">Delivered {order.deliveredAt}</Message>
               ) : (
                 <Message variant="danger">Not Delivered</Message>
               )}
@@ -137,17 +133,10 @@ const OrderScreen = ({ match, history }) => {
                     <ListGroup.Item key={index}>
                       <Row>
                         <Col md={1}>
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />
+                          <Image src={item.image} alt={item.name} fluid rounded />
                         </Col>
                         <Col>
-                          <Link to={`/product/${item.product}`}>
-                            {item.name}
-                          </Link>
+                          <Link to={`/product/${item.product}`}>{item.name}</Link>
                         </Col>
                         <Col md={4}>
                           {item.qty} x ${item.price} = ${item.qty * item.price}
